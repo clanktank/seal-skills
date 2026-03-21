@@ -7,9 +7,17 @@ description: Track upstream repository changes and identify which SEAL security 
 
 Keep SEAL security skills synchronized with the upstream frameworks repository.
 
+## Repositories
+
+- **Upstream (source of truth):** `https://github.com/security-alliance/frameworks` (branch: `develop`)
+- **Local fork:** `https://github.com/madjin/frameworks` (used for local work)
+- **Skills repo:** `https://github.com/madjin/seal-skills` (subdirectory: `seal-security-skills/`)
+
+The upstream `security-alliance/frameworks` is the authoritative reference. Local skills should be updated to reflect upstream content. The `madjin/frameworks` fork tracks upstream via `git remote add upstream`.
+
 ## Skill-to-Source Mapping
 
-Each skill derives content from specific documentation paths:
+Each skill derives content from specific documentation paths in `security-alliance/frameworks`:
 
 | Skill | Source Paths in `docs/pages/` |
 |-------|-------------------------------|
@@ -23,6 +31,31 @@ Each skill derives content from specific documentation paths:
 | community-security-advisor | `community-management/` |
 | opsec-advisor | `opsec/` |
 | safe-harbor-advisor | `safe-harbor/` |
+
+### Unmapped upstream paths (no skill coverage yet)
+
+These `docs/pages/` directories exist in upstream but have no corresponding skill:
+
+| Upstream Path | Notes |
+|---------------|-------|
+| `ai-security/` | New domain - AI security guidance |
+| `certs/` | Certification content |
+| `devsecops/` | DevSecOps practices |
+| `encryption/` | Encryption guidance |
+| `ens/` | ENS-related content |
+| `front-end-web-app/` | Frontend web app security |
+| `governance/` | Governance practices |
+| `iam/` | Identity and access management |
+| `monitoring/` | Monitoring and alerting |
+| `multisig-for-protocols/` | Multisig for protocols |
+| `privacy/` | Privacy guidance |
+| `secure-software-development/` | Secure SDLC |
+| `security-automation/` | Security automation |
+| `supply-chain/` | Supply chain security |
+| `threat-modeling/` | Threat modeling |
+| `treasury-operations/` | Treasury operations |
+| `user-team-security/` | User/team security |
+| `vulnerability-disclosure/` | Vulnerability disclosure |
 
 ## Sync Workflow
 
@@ -76,21 +109,20 @@ gh pr list --state merged --search "path:docs/pages/wallet-security"
 
 ## Sync Status File
 
-Maintain a sync status file at `~/.claude/skills/seal-security-skills/.sync-status.json`:
+Maintain a sync status file at `seal-security-skills/.sync-status` (in the skills repo root):
 
-```json
-{
-  "last_sync": "2024-12-18",
-  "last_commit": "abc123def",
-  "repo": "security-alliance/frameworks",
-  "skills": {
-    "wallet-security-advisor": {
-      "last_updated": "2024-12-18",
-      "source_commit": "abc123def",
-      "source_paths": ["docs/pages/wallet-security/"]
-    }
-  }
-}
+```
+last_sync=2026-03-21
+last_commit=cf3da3e4a9b0724881ffa02ac155290a873a2306
+upstream_repo=https://github.com/security-alliance/frameworks
+upstream_branch=develop
+fork_repo=https://github.com/madjin/frameworks
+```
+
+Compare `last_commit` against upstream to detect drift:
+```bash
+cd /home/jin/frameworks
+git log --oneline <last_commit>..upstream/develop -- docs/pages/
 ```
 
 ## Quick Sync Check Script
@@ -216,6 +248,54 @@ jobs:
           echo "Changed documentation areas:"
           git diff --name-only HEAD~1..HEAD -- docs/pages/ | cut -d'/' -f3 | sort -u
 ```
+
+## Drift Management
+
+### Measuring drift
+
+```bash
+cd /home/jin/frameworks
+
+# 1. Fetch upstream
+git fetch upstream
+
+# 2. Count commits behind
+git rev-list --count develop..upstream/develop -- docs/pages/
+
+# 3. List affected areas
+git diff --name-only develop..upstream/develop -- docs/pages/ | cut -d'/' -f3 | sort -u
+
+# 4. Show commit summaries per area
+for dir in $(git diff --name-only develop..upstream/develop -- docs/pages/ | cut -d'/' -f3 | sort -u); do
+  echo "=== $dir ==="
+  git log --oneline develop..upstream/develop -- "docs/pages/$dir/" | head -5
+  echo ""
+done
+```
+
+### Updating skills from upstream
+
+1. **Merge upstream into fork** (or just read from upstream directly):
+   ```bash
+   cd /home/jin/frameworks
+   git merge upstream/develop   # or: git checkout upstream/develop -- docs/pages/<area>/
+   ```
+
+2. **Review changed content** for each affected skill area
+3. **Update SKILL.md** if core guidance changed
+4. **Update reference files** if details/links changed
+5. **Update `.sync-status`** with new commit hash and date
+
+### Deciding what needs updating
+
+| Change Type | Priority | Action |
+|-------------|----------|--------|
+| New major section added | High | Add to skill or create new skill |
+| Existing content significantly revised | High | Review and update skill |
+| New subsection or details added | Medium | Consider adding to references |
+| Minor edits, typos, formatting | Low | No skill update needed |
+| New FAQ added | Medium | May warrant skill FAQ update |
+| New directory/domain added | High | Evaluate if new skill needed |
 
 ## Reference Files
 

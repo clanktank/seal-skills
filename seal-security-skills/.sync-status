@@ -1,3 +1,5 @@
-last_sync=2025-12-18
-last_commit=761fdea4619d92eaf216fe5db1139fee628fb06e
-repo=git@github.com:madjin/frameworks.git
+last_sync=2026-03-21
+last_commit=cf3da3e4a9b0724881ffa02ac155290a873a2306
+upstream_repo=https://github.com/security-alliance/frameworks
+upstream_branch=develop
+fork_repo=https://github.com/madjin/frameworks
