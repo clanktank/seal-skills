@@ -1,0 +1,32 @@
+# Secrets — never commit these
+*.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.secret
+config.yaml
+**/secrets/
+**/.secrets/
+
+# API keys in any format
+*sk-synth*
+*sk-ant*
+*sk-proj*
+*sk_live_*
+*sk_test_*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.bak
