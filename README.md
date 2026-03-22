@@ -4,51 +4,98 @@ SEAL Security Knowledge Graph — 27 security domains from [security-alliance/fr
 
 ## Install
 
-### Option 1: Copy directly
-
-```bash
-cp -r seal/ ~/.hermes/skills/seal
-```
-
-### Option 2: Clone
+### 1. Clone the skills
 
 ```bash
 git clone https://github.com/clanktank/seal-skills.git ~/.hermes/skills/seal
 ```
 
-### Option 3: Skills Hub (if published)
+### 2. Add slash commands (Discord)
+
+Copy-paste these into your terminal to register slash commands via the gateway config:
 
 ```bash
-hermes skills tap add clanktank/seal-skills
-hermes skills install seal-incident-management
+hermes config set gateway.discord.commands.seal-start.description "Open SEAL Security Coach"
+hermes config set gateway.discord.commands.seal-start.dispatch "/seal-start"
+hermes config set gateway.discord.commands.seal-progress.description "Check your security readiness"
+hermes config set gateway.discord.commands.seal-progress.dispatch "/seal-progress"
+hermes config set gateway.discord.commands.seal_911.description "Emergency security help — routes to official SEAL 911"
+hermes config set gateway.discord.commands.seal_911.dispatch "/seal_911"
 ```
 
-## Verify installation
+Or add to `~/.hermes/config.yaml` directly:
+
+```yaml
+gateway:
+  discord:
+    commands:
+      - name: seal-start
+        description: "Open SEAL Security Coach"
+        dispatch: "/seal-start"
+      - name: seal-progress
+        description: "Check your security readiness"
+        dispatch: "/seal-progress"
+      - name: seal_911
+        description: "Emergency security help — routes to official SEAL 911"
+        dispatch: "/seal_911"
+```
+
+### 3. Set inference provider
+
+For private inference (recommended for sensitive security data):
+
+```bash
+# Venice.ai (no data retention)
+hermes config set provider.base_url "https://api.venice.ai/v1"
+hermes config set provider.model "qwen3-5-35b-a3b"
+
+# LM Studio (local, zero leakage)
+hermes config set provider.base_url "http://localhost:1234/v1"
+hermes config set provider.model "qwen/qwen3.5-32b"
+```
+
+### 4. Restart
+
+```bash
+hermes restart
+```
+
+### Verify
 
 ```bash
 hermes chat --toolsets skills -q "What seal skills do you have?"
 ```
 
+On Discord, type `/seal-start` in any channel. On Telegram, message the bot and say "help me with security."
+
 ## Usage
 
-Ask a security question. The agent uses `INDEX.md` to match your question to a domain, then loads that skill.
+### Discord
+
+- `/seal-start` — opens the coach menu with daily tip + options
+- `/seal-progress` — guided readiness check (8-10 questions)
+- `/seal_911` — emergency handoff to official SEAL 911 bot
+- `@mention` — ask any security question
+
+### Telegram / CLI
+
+- Say "check my posture" or "start coaching"
+- Ask any security question naturally
+- "emergency help" routes to SEAL 911
+
+### Mention-based Q&A
+
+Ask security questions naturally. The agent matches your question to the right skill domain and answers using the SEAL frameworks.
 
 ```
 > My wallet was drained, what do I do?
-# Agent loads seal-incident-management + seal-wallet-security + seal-safe-harbor
+# Loads seal-incident-management + seal-wallet-security + seal-safe-harbor
 
 > How do I set up multisig for our treasury?
-# Agent loads seal-multisig-for-protocols + seal-treasury-operations
+# Loads seal-multisig-for-protocols + seal-treasury-operations
 
 > We're hiring remote devs, any security concerns?
-# Agent loads seal-dprk-it-workers + seal-opsec
-```
-
-Or invoke directly:
-
-```
-/seal-wallet-security
-/seal-incident-management How do I handle a drainer attack?
+# Loads seal-dprk-it-workers + seal-opsec
 ```
 
 ## Structure
@@ -58,12 +105,14 @@ Each skill follows the [Agent Skills spec](https://agentskills.io) + Hermes conv
 ```
 ~/.hermes/skills/seal/
 ├── INDEX.md                         # MOC trigger table (read by agent on load)
+├── SECURITY.md                      # Data privacy & inference provider guide
 ├── .baseline.json                   # Quality metrics for version tracking
 ├── .skill-writing-playbook.md       # Best practices for improving skills
+├── .env.example                     # Inference provider config template
 ├── README.md
 │
 ├── awareness/
-│   ├── SKILL.md                     # Frontmatter + When to Use + Key Concepts
+│   ├── SKILL.md                     # Frontmatter + When to Use + Gotchas
 │   └── references/                  # On-demand deep content
 │       ├── threat-vectors.md
 │       ├── scam-patterns.md
@@ -90,17 +139,23 @@ Each skill follows the [Agent Skills spec](https://agentskills.io) + Hermes conv
 
 ## SKILL.md format
 
+Each skill has cross-domain triggers and gotchas:
+
 ```yaml
 ---
 name: seal-incident-management
 description: >
-  Security incident lifecycle — detection, response, containment, communication,
-  lessons learned, and playbooks for specific attack types. Use when someone
-  reports a hack, suspicious activity, or needs IR guidance.
+  Handle security incidents — compromised wallets, protocol hacks, suspicious
+  transactions, drainer attacks, malware. Use when someone reports a breach,
+  asks 'what do I do if my wallet was hacked', or needs IR playbooks.
+  Load seal-safe-harbor if whitehat involvement is possible.
+  Load seal-wallet-security if wallet-specific.
+  Load seal-monitoring for detection setup.
+  Load seal-dprk-it-workers if DPRK-related.
 metadata:
   category: security
   tags: [incident-response, playbooks, detection, containment]
-  related_skills: [seal-safe-harbor, seal-opsec, seal-wallet-security]
+  related_skills: [seal-safe-harbor, seal-opsec, seal-wallet-security, seal-monitoring, seal-threat-modeling, seal-dprk-it-workers]
 ---
 
 # Incident Management
@@ -110,27 +165,19 @@ metadata:
 - Suspicious transaction detected
 - Need for IR playbook or escalation
 
-## Related Domains
-This skill connects to: seal-safe-harbor, seal-opsec, seal-wallet-security
-
 ## Key Concepts
 [framework content — cleaned from security-alliance/frameworks]
+
+## Gotchas
+- Evidence must be preserved BEFORE remediation — screenshot transactions, save logs, document timeline first
+- Communicating during an incident is legally risky — get legal review before any public statement
+- Auto-pause mechanisms can be exploited to DoS your protocol — balance protection with availability
+- The SEAL 911 war room exists specifically for coordinated response — use it rather than going solo
 
 ## References
 - Playbooks (references/playbooks/)
 - Communication Strategies
-
-## Pitfalls
-[improvements planned — see versioning below]
 ```
-
-## How navigation works
-
-1. Agent reads `INDEX.md` trigger table to find matching domain
-2. `skill_view("seal-incident-management")` loads the SKILL.md
-3. `related_skills` in frontmatter tells agent which domains to also load
-4. `skill_view("seal-incident-management", "references/playbooks/hacked-drainer.md")` for deep content
-5. Agent follows cross-references until it has enough context
 
 ## Domains (27)
 
@@ -164,23 +211,22 @@ This skill connects to: seal-safe-harbor, seal-opsec, seal-wallet-security
 | vulnerability-disclosure | Responsible disclosure | 2 |
 | wallet-security | Wallet types, seed phrases, multisig | 18 |
 
+## Security & Privacy
+
+See [SECURITY.md](SECURITY.md) for trust assumptions, inference provider tradeoffs, and deployment patterns.
+
+**Key rule:** These skills handle sensitive organizational security data. Choose your inference provider carefully. See [SECURITY.md](SECURITY.md) for the full comparison.
+
 ## Versioning
 
 Every change is measured against `.baseline.json`. Metrics tracked:
 
-| Metric | v1.0 (current) | Notes |
+| Metric | v1.0 | v2.0 |
 |---|---|---|
-| Gotchas sections | 0/27 | Highest-signal content per playbook |
-| `[[wikilinks]]` | 0 | Cross-domain navigation |
-| Avg words/skill | 203 | Scope/depth indicator |
-| Avg description length | 130 chars | Trigger specificity |
-| Key concepts populated | 27/27 | Already done |
-
-To compare versions:
-
-```bash
-git diff v1.0..HEAD -- .baseline.json
-```
+| Gotchas sections | 0/27 | 27/27 |
+| Cross-domain triggers | 0/27 | 27/27 |
+| Avg description length | 130 chars | 358 chars |
+| Claude Code test avg | 4.75/5 | 4.85/5 |
 
 ## Source
 
@@ -188,3 +234,4 @@ git diff v1.0..HEAD -- .baseline.json
 - Skill standard: https://agentskills.io
 - Hermes docs: https://hermes-agent.nousresearch.com/docs/developer-guide/creating-skills
 - Best practices: See `.skill-writing-playbook.md`
+- Data security: See `SECURITY.md`
