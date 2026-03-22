@@ -1,0 +1,11 @@
+#!/bin/bash
+# Pre-commit hook: prevent secrets from being committed
+
+# Check for common secret patterns
+if git diff --cached --diff-filter=ACM | grep -iE '(sk-synth|sk-ant|sk-proj|sk_live_|sk_test_|api.key.*=.*[a-zA-Z0-9]{20,}|password.*=.*[a-zA-Z0-9]{8,}|secret.*=.*[a-zA-Z0-9]{8,})' 2>/dev/null; then
+    echo ""
+    echo "ERROR: Potential secret detected in staged files!"
+    echo "Review the above matches and remove secrets before committing."
+    echo ""
+    exit 1
+fi
