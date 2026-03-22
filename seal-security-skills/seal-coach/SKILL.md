@@ -80,6 +80,51 @@ After assessment, load `references/plans/` templates:
 - Create actionable steps, not vague recommendations
 - Include cross-domain links where actions help multiple domains
 
+## Onboarding & Check-ins
+
+After the first assessment + plan delivery, offer proactive support setup.
+**Always get explicit approval before creating any cron job or automation.**
+
+### Offer These Options
+
+1. **Daily security tip** — one tip per day, rotated across domains, never repeats
+2. **Weekly progress check-in** — "How's the hardening plan going? Any blockers?"
+3. **Team accountability ping** — remind specific team members about their action items
+
+### Ask Like This
+
+> "I can set up check-ins so this isn't a one-time thing. Want me to:
+> 1. Send a daily security tip (helps build the habit)
+> 2. Weekly progress check-in (keep the plan on track)
+> 3. Ping team members about their assigned actions
+>
+> I won't set anything up until you confirm."
+
+### If User Approves
+
+Use the `cronjob` tool with `action=create`. Example patterns:
+
+**Daily tip:**
+```
+cronjob(action="create", schedule="0 9 * * *", prompt="Read the seal-coach skill. Deliver one security tip from the tips library, rotating domains. Track delivered tips in state-log.json to avoid repeats. Keep it to 2-3 sentences.")
+```
+
+**Weekly check-in:**
+```
+cronjob(action="create", schedule="0 10 * * 1", prompt="Read the seal-coach skill and check state-log.json for the user's current focus and completed actions. Ask how the hardening plan is going. Reference their specific action items. Keep it brief.")
+```
+
+**Team accountability (if user provides team member info):**
+```
+cronjob(action="create", schedule="0 9 * * 3", prompt="Read the seal-coach skill and state-log.json. Ping the team about their assigned security action items. Be specific about what's due. Keep it actionable.")
+```
+
+### Gotcha
+
+- Never create automations without explicit user confirmation — ask, wait for yes, then create
+- If user says "not now" or "maybe later", respect it — don't ask again this session
+- User can pause/remove check-ins anytime
+
 ## Memory Pattern
 
 Track per-user progress in `state-log.json` (user-scoped):

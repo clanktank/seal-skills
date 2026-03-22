@@ -83,6 +83,16 @@ Phase 3: Strengthen (Week 7-12)
 
 Every action maps to specific SEAL framework controls — no vague advice.
 
+### Proactive Onboarding
+
+After the first assessment, the coach offers to set up ongoing support:
+
+- **Daily security tips** — builds a security habit, one tip per day rotated across 27 domains
+- **Weekly progress check-ins** — "How's the hardening plan going? Any blockers?"
+- **Team accountability pings** — reminds specific team members about their assigned actions
+
+The coach asks, user explicitly confirms, then creates scheduled check-ins. No silent automations.
+
 ### Memory Across Sessions
 
 The coach remembers your readiness bands, completed actions, tips already delivered, and current focus. When you come back: "Last time we identified incident-management as Critical. Want to pick up there?"
@@ -96,6 +106,7 @@ The coach remembers your readiness bands, completed actions, tips already delive
 | No memory between sessions | Tracks readiness bands, completed actions, avoids repeating tips |
 | No domain expertise | Maps every recommendation to specific SEAL framework controls |
 | Cloud-dependent, data retention | Zero data retention via Venice.ai, local-first state |
+| One-shot interaction | Offers proactive check-ins (daily tips, weekly reviews, team accountability) |
 
 ## Validated Against Test Suite
 
