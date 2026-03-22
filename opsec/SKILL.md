@@ -1,7 +1,7 @@
 ---
 name: seal-opsec
 description: >
-  Handle operational security — threat modeling, risk assessment, travel security, device hardening, countermeasures across people/technical/physical domains. Use when discussing personal security, travel safety, device management, or threat modeling exercises. Load seal-incident-management for incident response. Load seal-iam for access control. Load seal-privacy for privacy tools. Load seal-dprk-it-workers for insider threats.
+  Handle operational security — threat modeling, risk assessment, travel security, device hardening, countermeasures across people/technical/physical domains. Use when discussing personal security, travel safety, device management, or threat modeling exercises. Load seal-incident-management for incident response. Load seal-iam for access control. Load seal-privacy for privacy tools. Load seal-encryption for device encryption and secure storage. Load seal-dprk-it-workers for insider threats.
 metadata:
   category: security
   tags: ['opsec', 'threat-modeling', 'risk', 'countermeasures', 'travel']

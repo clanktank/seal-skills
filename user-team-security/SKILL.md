@@ -1,7 +1,7 @@
 ---
 name: seal-user-team-security
 description: >
-  Handle team security training — phishing defense, security-aware culture, security training programs. Use when building security training programs, discussing phishing simulations, or improving team security culture. Load seal-awareness for individual awareness. Load seal-community-management for community security. Load seal-opsec for broader security posture.
+  Handle team security training — phishing defense, security-aware culture, security training programs. Use when building security training programs, discussing phishing simulations, or improving team security culture. Load seal-awareness for individual awareness. Load seal-community-management for community security. Load seal-opsec for broader security posture. Load seal-iam if the concern includes access control or onboarding.
 metadata:
   category: security
   tags: ['team-security', 'phishing', 'training', 'culture']

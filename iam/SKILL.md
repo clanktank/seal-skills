@@ -1,7 +1,7 @@
 ---
 name: seal-iam
 description: >
-  Handle identity and access management — access control, RBAC, secure authentication, MFA, and identity lifecycle. Use when discussing user permissions, authentication methods, access reviews, or SSO. Load seal-opsec for broader identity security. Load seal-encryption for authentication encryption. Load seal-multisig-for-protocols for on-chain identity.
+  Handle identity and access management — access control, RBAC, secure authentication, MFA, and identity lifecycle. Use when discussing user permissions, authentication methods, access reviews, or SSO. Load seal-opsec for broader identity security and offboarding procedures. Load seal-encryption for authentication encryption. Load seal-multisig-for-protocols for on-chain identity.
 metadata:
   category: security
   tags: ['iam', 'access-control', 'rbac', 'authentication']

@@ -1,7 +1,7 @@
 ---
 name: seal-incident-management
 description: >
-  Handle security incidents — compromised wallets, protocol hacks, suspicious transactions, drainer attacks, malware. Use when someone reports a breach, asks 'what do I do if my wallet was hacked', or needs IR playbooks. Load seal-safe-harbor if whitehat involvement is possible. Load seal-wallet-security if wallet-specific. Load seal-monitoring for detection setup. Load seal-dprk-it-workers if DPRK-related.
+  Handle security incidents — compromised wallets, protocol hacks, suspicious transactions, drainer attacks, malware. Use when someone reports a breach, asks 'what do I do if my wallet was hacked', or needs IR playbooks. Load seal-safe-harbor if whitehat involvement is possible. Load seal-wallet-security if wallet-specific. Load seal-monitoring for detection setup. Load seal-dprk-it-workers if DPRK-related. Load seal-safe-harbor if whitehat involvement, coordinated disclosure, or post-incident recovery involves external parties.
 metadata:
   category: security
   tags: ['incident-response', 'playbooks', 'detection', 'containment']
