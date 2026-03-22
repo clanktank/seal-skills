@@ -1,7 +1,7 @@
 ---
 name: seal-community-management
 description: >
-  Managing security across Discord, Telegram, Twitter, and other community platforms. Covers moderation, social engineering defense, and platform-specific security.
+  Handle security across Discord, Telegram, and social platforms — moderation, social engineering defense, platform-specific security. Use when someone reports a scam in their Discord, asks about Telegram security, needs community moderation guidance, or discusses impersonation attacks. Load seal-incident-management if an actual breach occurred. Load seal-awareness for user-facing security training.
 metadata:
   category: security
   tags: ['discord', 'telegram', 'moderation', 'social-engineering']
@@ -31,6 +31,12 @@ compromised—whether by phishing, fraudulent links, or account takeovers—it c
 attacks, putting both users and organizational reputations at risk.
 Here, we present essential best practices to safeguard your community. In the following sections, we will explore
 platform-specific recommendations in more depth.
+## Gotchas
+- Telegram group chats are NOT end-to-end encrypted — assume all messages are visible to Telegram
+- Discord bots with admin permissions can read all messages — audit bot permissions regularly
+- Impersonation accounts often DM members directly — set server rules to auto-flag unsolicited DMs
+- Scam bots auto-join servers and DM new members — configure join gate and verification requirements
+
 ## References
 - Discord
 - Google

@@ -1,7 +1,7 @@
 ---
 name: seal-security-testing
 description: >
-  Security testing methodologies — unit testing, integration testing, fuzz testing, mutation testing, static analysis, and formal verification.
+  Handle security testing — unit testing, integration testing, fuzz testing, static analysis, formal verification. Use when discussing testing strategies, fuzzing, static analysis tools, or formal verification. Load seal-devsecops for CI/CD integration. Load seal-secure-software-development for code standards. Load seal-external-security-reviews for external audits.
 metadata:
   category: security
   tags: ['testing', 'fuzz-testing', 'static-analysis']
@@ -35,6 +35,11 @@ There are several types of testing:
 - **Formal Verification**: Uses mathematical methods to prove the correctness of algorithms and protocols.
 Some types of testing overlap, for example, a unit test could also be a fuzz test. We will focus on testing and how it
 applies to smart contracts, and use solidity as an example.
+## Gotchas
+- Fuzz testing finds edge cases but not logic bugs — combine with formal verification for critical contracts
+- 100% code coverage doesn't mean secure — coverage measures execution, not correctness
+- Mutation testing reveals weak tests but is slow — run it in nightly CI, not on every commit
+
 ## References
 - Fuzz Testing
 - Formal Verification

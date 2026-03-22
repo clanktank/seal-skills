@@ -1,7 +1,7 @@
 ---
 name: seal-user-team-security
 description: >
-  Team and user security — phishing defense, security-aware culture building, and security training programs.
+  Handle team security training — phishing defense, security-aware culture, security training programs. Use when building security training programs, discussing phishing simulations, or improving team security culture. Load seal-awareness for individual awareness. Load seal-community-management for community security. Load seal-opsec for broader security posture.
 metadata:
   category: security
   tags: ['team-security', 'phishing', 'training', 'culture']
@@ -24,6 +24,10 @@ Use `skill_view("seal-community-management")` if the question spans multiple are
 
 ## Key Concepts
 # User and Team Security
+## Gotchas
+- Phishing simulations that punish failures create fear, not learning — focus on education over punishment
+- Annual security training is forgotten within weeks — use continuous micro-learning instead
+
 ## References
 - Security Training
 - Security Aware Culture

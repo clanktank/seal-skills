@@ -1,7 +1,7 @@
 ---
 name: seal-dprk-it-workers
 description: >
-  Detecting and mitigating DPRK IT worker infiltration — case studies, TTPs, and hiring security practices for Web3 organizations.
+  Handle DPRK IT worker infiltration detection and mitigation. Use when hiring remote developers, discussing insider threats from state actors, or reviewing employee verification processes. Specifically useful when someone mentions 'hiring remote Solidity devs', 'suspicious contractor', or 'worker verification'. Load seal-opsec for broader insider threat context. Load seal-iam for access control during onboarding.
 metadata:
   category: security
   tags: ['dprk', 'hiring', 'insider-threat', 'attribution']
@@ -35,6 +35,12 @@ Throughout this module, we will discuss:
 - How to mitigate the risks and impact of insider threat actors
 - How to harden your defenses against insider threat actors
 - Potential consequences of insider threats for you and your organization
+## Gotchas
+- DPRK workers increasingly use non-Asian facilitators and stolen US identities — ethnicity-based screening doesn't work
+- They often refuse or delay video calls, use VPNs showing US locations, and have inconsistent timezone patterns
+- Payment requests for unusual methods (crypto to unknown wallets, third-party accounts) are a major red flag
+- They target React/Node/Solidity roles specifically — any web3 hiring pipeline should have enhanced verification
+
 ## References
 - Techniques Tactics And Procedures
 - Case Studies

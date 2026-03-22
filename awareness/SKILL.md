@@ -1,7 +1,7 @@
 ---
 name: seal-awareness
 description: >
-  Security awareness training, threat recognition, phishing defense, and building a security-conscious culture. Use when discussing security education, scam prevention, or organizational security mindset.
+  Handle phishing, social engineering, scam recognition, and security culture training. Use when someone reports a phishing attempt, asks about scam patterns, needs team security awareness training, or mentions fake interviews/impersonation/cloned sites. Load seal-community-management if the attack happened on Discord/Telegram. Load seal-incident-management if a breach occurred.
 metadata:
   category: security
   tags: ['awareness', 'phishing', 'training', 'culture', 'web3']
@@ -31,6 +31,12 @@ This framework is all about understanding the threat landscape, recognizing risk
 security-aware mindset. It serves as a high-level guide to help individuals and organizations identify potential
 vulnerabilities and remain vigilant—without overlapping with the detailed, technical scenarios covered in other
 sections.
+## Gotchas
+- Most phishing in Web3 targets wallet approvals, not passwords — teach users to check token approval requests, not just links
+- Social engineering often comes from compromised friends' accounts, not strangers — always verify through a secondary channel
+- Clipboard hijacking swaps wallet addresses silently — users should verify the full address, not just first/last characters
+- Fake interview scams are the #1 DPRK infiltration vector — verify company domains and never install 'test' software
+
 ## References
 - Resources And Further Reading
 - Understanding Threat Vectors

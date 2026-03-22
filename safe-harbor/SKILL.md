@@ -1,7 +1,7 @@
 ---
 name: seal-safe-harbor
 description: >
-  Whitehat protection frameworks — scope and terms, on-chain adoption, self-adoption guides, and safe harbor for security researchers.
+  Handle whitehat protection — safe harbor terms, scope of authorized research, legal protection for security researchers. Use when someone reports a vulnerability, discusses responsible disclosure, or asks about legal protections for security research. Load seal-incident-management for the incident handling process. Load seal-vulnerability-disclosure for disclosure procedures. Load seal-governance for legal/compliance context.
 metadata:
   category: security
   tags: ['safe-harbor', 'whitehat', 'bug-bounty', 'legal']
@@ -31,6 +31,11 @@ alt="Whitehat Logo" />
 <source src="https://frameworks-static.s3.us-east-2.amazonaws.com/images/safe-harbor/Protocol_Explainer_Video.mp4"
 type="video/mp4" />
 Your browser does not support the video tag.
+## Gotchas
+- Safe harbor only covers actions within the defined scope — out-of-scope testing can still be prosecuted
+- Verbal agreements don't protect you — get safe harbor terms in writing before any research begins
+- On-chain attestations via EAS provide immutable proof of safe harbor adoption — use them
+
 ## References
 - Self Checklist
 - Scope Terms

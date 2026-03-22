@@ -1,7 +1,7 @@
 ---
 name: seal-devsecops
 description: >
-  Security integrated into development workflows — CI/CD security, code signing, repository hardening, and security testing automation.
+  Handle CI/CD security, code signing, repository hardening, and secure development workflows. Use when discussing GitHub/GitLab security, supply chain attacks, dependency management, or pipeline vulnerabilities. Load seal-supply-chain for dependency-specific concerns. Load seal-security-testing for testing methodology. Load seal-secure-software-development for coding standards.
 metadata:
   category: security
   tags: ['devops', 'ci-cd', 'code-signing', 'development']
@@ -37,6 +37,12 @@ static and dynamic analysis tools in your CI/CD process, to identify and mitigat
 critical issues.
 2. Implement automated security testing and monitoring.
 3. Development, Operations and Security teams should be aligned and work closely together.
+## Gotchas
+- Storing secrets in git history is permanent — even if removed, they're in every clone. Use secret scanning and rotate immediately
+- GitHub Actions secrets are available to ALL branches by default — use environment protection rules for production
+- npm/yarn supply chain attacks target popular packages — pin dependencies and use lockfiles, but also verify with SRI hashes
+- CI/CD pipelines with write access to repos are high-value targets — restrict permissions and audit pipeline configs
+
 ## References
 - Repository Hardening
 - Security Testing

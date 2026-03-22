@@ -1,7 +1,7 @@
 ---
 name: seal-opsec
 description: >
-  Operational security — threat modeling, risk assessment, countermeasures across people/technical/physical domains, and governance programs.
+  Handle operational security — threat modeling, risk assessment, travel security, device hardening, countermeasures across people/technical/physical domains. Use when discussing personal security, travel safety, device management, or threat modeling exercises. Load seal-incident-management for incident response. Load seal-iam for access control. Load seal-privacy for privacy tools. Load seal-dprk-it-workers for insider threats.
 metadata:
   category: security
   tags: ['opsec', 'threat-modeling', 'risk', 'countermeasures', 'travel']
@@ -28,6 +28,11 @@ Operational Security (OpSec) is a systematic approach to identifying critical in
 information, analyzing vulnerabilities, assessing risks, and implementing countermeasures to protect sensitive data and
 operations. This framework provides comprehensive guidance for implementing effective operational security practices in
 Web2 and Web3 environments.
+## Gotchas
+- Travel security is often overlooked — border crossings can involve device confiscation and compelled access
+- Personal devices used for work create shadow IT — enforce MDM or at minimum separate profiles
+- Threat models must be updated when team composition changes — new members change the attack surface
+
 ## References
 - Monitoring Detection
 - Threat Modeling Overview

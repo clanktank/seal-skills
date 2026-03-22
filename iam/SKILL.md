@@ -1,7 +1,7 @@
 ---
 name: seal-iam
 description: >
-  Identity and access management — access control, RBAC, secure authentication, and identity lifecycle management.
+  Handle identity and access management — access control, RBAC, secure authentication, MFA, and identity lifecycle. Use when discussing user permissions, authentication methods, access reviews, or SSO. Load seal-opsec for broader identity security. Load seal-encryption for authentication encryption. Load seal-multisig-for-protocols for on-chain identity.
 metadata:
   category: security
   tags: ['iam', 'access-control', 'rbac', 'authentication']
@@ -27,6 +27,11 @@ Use `skill_view("seal-encryption")` if the question spans multiple areas.
 Identity and Access Management (IAM) is defined as managing who has access to your systems and data, and ensuring that
 access is secure and appropriate. Effective IAM practices help prevent unauthorized access, reduce the risk of insider
 threats, and ensure that users have the necessary access to perform their roles efficiently.
+## Gotchas
+- SMS-based 2FA is vulnerable to SIM swapping — use hardware keys or authenticator apps, never SMS
+- Service accounts with permanent API keys are the #1 lateral movement vector — use short-lived tokens
+- RBAC without periodic access reviews leads to permission creep — schedule quarterly reviews
+
 ## References
 - Secure Authentication
 - Access Management

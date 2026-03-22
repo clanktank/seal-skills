@@ -1,7 +1,7 @@
 ---
 name: seal-ens
 description: >
-  Ethereum Name Service security — cross-chain compatibility, data integrity, smart contract integration, and interface compliance.
+  Handle ENS (Ethereum Name Service) security — cross-chain compatibility, data integrity, smart contract integration. Use when discussing .eth domains, name resolution security, or DNS-on-chain concerns. Load seal-front-end-web-app for interface security. Load seal-infrastructure for DNS security.
 metadata:
   category: security
   tags: ['ens', 'ethereum', 'dns', 'web3']
@@ -33,6 +33,10 @@ The Ethereum Name Service (ENS) is a distributed, open, and extensible naming sy
 ENS maps human-readable names like 'alice.eth' to machine-readable identifiers such as Ethereum addresses, other
 cryptocurrency addresses, content hashes, metadata, and more. ENS also supports 'reverse resolution', making it possible
 to associate metadata such as primary names or interface descriptions with Ethereum addresses.
+## Gotchas
+- ENS subdomain takeovers can redirect funds — verify subdomain ownership before pointing wallets
+- Cross-chain ENS resolution can return different addresses on different chains — always verify the target chain
+
 ## References
 - Smart Contract Integration
 - Name Handling Normalization

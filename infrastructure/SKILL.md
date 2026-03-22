@@ -1,7 +1,7 @@
 ---
 name: seal-infrastructure
 description: >
-  Infrastructure security — OS hardening, network security, DDoS protection, cloud security, DNS security, and zero-trust principles.
+  Handle infrastructure security — OS hardening, network security, DDoS protection, cloud security, DNS security, zero-trust. Use when discussing server hardening, firewall rules, cloud configurations, or network architecture. Load seal-devsecops for CI/CD security. Load seal-monitoring for infrastructure monitoring. Load seal-encryption for data-in-transit protection.
 metadata:
   category: security
   tags: ['infrastructure', 'network', 'cloud', 'zero-trust', 'dns']
@@ -33,6 +33,11 @@ use different providers for infrastructure, DDoS protection, domain registration
 provider that provides all of these? On one hand, putting all eggs in one basket means a failure on said service would
 cause downtime, however by using a single service and ensuring it’s following all best practices with regards to
 security measures means a lower risk surface.
+## Gotchas
+- Default cloud security groups are often too permissive — audit inbound rules on every deployment
+- DNS hijacking can redirect your entire domain without touching your servers — use DNSSEC and registrar locks
+- Zero trust for a small team doesn't mean buying expensive tools — it means authenticating every request regardless of source
+
 ## References
 - Ddos Protection
 - Asset Inventory
