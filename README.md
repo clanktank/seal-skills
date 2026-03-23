@@ -1,11 +1,4 @@
-```
- _____ _____  ___   _      _____ _   _______ _      _      _____
-/  ___|  ___|/ _ \ | |   /  ___| | / /_   _| |    | |    /  ___|
-\ `--.| |__ / /_\ \| |   \ `--.| |/ /  | | | |    | |    \ `--.
- `--. \  __||  _  || |    `--. \    \  | | | |    | |     `--. \
-/\__/ / |___| | | || |____ /\__/ / |\ \_| |_| |____| |____ /\__/ /
-\____/\____/\_| |_/_____/ \____/\_| \_/\___/\_____/\_____/\____/
-```
+# seal-skills
 
 Security knowledge graph for AI agents. 27 domains, 111 certification controls, from the [SEAL Frameworks](https://github.com/security-alliance/frameworks).
 
@@ -122,9 +115,28 @@ Each domain is a skill with cross-domain triggers and gotchas:
 
 ## Security & Privacy
 
-These skills handle sensitive organizational security data. See [SECURITY.md](SECURITY.md) for trust assumptions and inference provider tradeoffs.
+SEAL skills handle information about an organization's security posture — which controls they fail, weak configurations, incident gaps. **Using these with a cloud LLM sends sensitive security data to a third party.**
 
-**TL;DR:** Use Venice.ai (no data retention) or local inference (LM Studio, Ollama) for sensitive security discussions.
+### Provider trust
+
+| Provider | What they see | Risk | When to use |
+|----------|--------------|------|-------------|
+| **Local LLM** (Ollama, vLLM) | Nothing leaves the machine | None | Highest security |
+| **Venice.ai** | Queries during inference, no retention | Low | Privacy + quality balance |
+| **Self-hosted** (Modal, Lambda) | You control infra | Low-Medium | Scale + full control |
+| **Anthropic/Claude** | All queries retained | High | Non-sensitive only |
+| **OpenRouter** | Aggregator, varies by provider | Varies | Never for sensitive data |
+
+Venice.ai guarantees no data retention and no training on user data. "No retention" is a policy, not a technical guarantee — treat Venice as lower-risk than Anthropic/OpenAI, but not equivalent to local inference.
+
+### What flows to the LLM
+
+- Your security questions (reveals what you're worried about)
+- Answers to cert controls ("no" = specific gap identified)
+- Incident scenarios (details of breaches)
+- Gotchas discussed (known weaknesses)
+
+**Rule:** Before deploying for any organization, ask: *"Are we comfortable with our inference provider seeing this data?"* If no, use local inference or Venice.ai.
 
 ## Source
 
